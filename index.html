@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio | Arrazi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#hero" class="logo">Muhammad Arrazi<span>.</span></a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Beranda</a></li>
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#skills">Keterampilan</a></li>
+      <li><a href="#projects">Proyek</a></li>
+      <li><a href="#experience">Pengalaman</a></li>
+      <li><a href="#certificates">Sertifikat</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-content fade-in">
+      <div class="hero-image-wrapper">
+        <img id="heroImage" class="profile-image" src="uploads/profile-1788356780847.png" alt="Foto Profil"
+             onerror="this.style.display='none'; document.getElementById('heroImageFallback').style.display='flex';">
+        <div id="heroImageFallback" class="profile-image-fallback" style="display:none;">
+          <i class="fas fa-user"></i>
+        </div>
+      </div>
+      <h1 id="heroName">Muhammad Arrazi</h1>
+      <p class="tagline" id="heroTagline">Bachelor of Informatics Engineering | Software Engineer with a foundation in Artificial Intelligence.</p>
+      <p class="subtitle" id="heroSubtitle">Sebagai seorang Informatics Engineering, saya mendedikasikan diri untuk membangun software yang efisien dan mengintegrasikannya dengan dasar-dasar Artificial Intelligence.</p>
+      <a href="#projects" class="cta-button" id="heroCta">Lihat Proyek Saya</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">Tentang Saya</h2>
+      <div class="about-content fade-in">
+        <div class="about-text">
+          <p id="aboutDescription">Saya adalah seorang lulusan S1 Teknik Informatika yang memiliki beberapa pengalaman sebagai Software Engineer, di mana saya memiliki nilai plus berupa pemahaman dasar tentang teknologi Kecerdasan Buatan (AI).</p>
+          <div class="about-details">
+            <div class="detail-item">
+              <div class="detail-icon"><i class="fas fa-graduation-cap"></i></div>
+              <div>
+                <h3>Pendidikan</h3>
+                <p id="aboutEducation">S1 Teknik Informatika - Universitas Perjuangan Tasikmalaya (2022 - 2026)</p>
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon"><i class="fas fa-bullseye"></i></div>
+              <div>
+                <h3>Fokus Karir</h3>
+                <p id="aboutFocus">Web Developer, Software Engineering, Artificial Intelligence.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <div class="container">
+      <h2 class="section-title">Keterampilan</h2>
+      <div class="skills-grid">
+        <div class="skill-category fade-in">
+          <h3><i class="fas fa-code"></i> Hard Skills</h3>
+          <div class="skill-list" id="hardSkills">
+            <div class="skill-item"><i class="fab fa-python"></i><span>Python</span></div>
+            <div class="skill-item"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
+            <div class="skill-item"><i class="fas fa-brain"></i><span>Machine Learning</span></div>
+            <div class="skill-item"><i class="fab fa-html5"></i><span>HTML &amp; CSS</span></div>
+            <div class="skill-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+            <div class="skill-item"><i class="fas fa-database"></i><span>SQL Database</span></div>
+          </div>
+        </div>
+        <div class="skill-category fade-in">
+          <h3><i class="fas fa-handshake"></i> Soft Skills</h3>
+          <div class="skill-list" id="softSkills">
+            <div class="skill-item"><i class="fas fa-lightbulb"></i><span>Problem Solving</span></div>
+            <div class="skill-item"><i class="fas fa-users"></i><span>Kerja Tim</span></div>
+            <div class="skill-item"><i class="fas fa-comments"></i><span>Komunikasi</span></div>
+            <div class="skill-item"><i class="fas fa-clock"></i><span>Manajemen Waktu</span></div>
+            <div class="skill-item"><i class="fas fa-chess-king"></i><span>Kepemimpinan</span></div>
+            <div class="skill-item"><i class="fas fa-search"></i><span>Berpikir Kritis</span></div>
+          </div>
+        </div>
+        <div class="skill-category fade-in">
+          <h3><i class="fas fa-tools"></i> Tools &amp; Teknologi</h3>
+          <div class="skill-list" id="toolSkills">
+            <div class="skill-item"><i class="fas fa-code"></i><span>VS Code</span></div>
+            <div class="skill-item"><i class="fab fa-github"></i><span>Git &amp; GitHub</span></div>
+            <div class="skill-item"><i class="fas fa-cogs"></i><span>TensorFlow</span></div>
+            <div class="skill-item"><i class="fab fa-figma"></i><span>Figma</span></div>
+            <div class="skill-item"><i class="fas fa-paper-plane"></i><span>Postman</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2 class="section-title">Proyek</h2>
+      <div class="projects-controls">
+        <button class="project-nav-btn" id="projectPrevBtn" aria-label="Proyek sebelumnya">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="project-nav-btn" id="projectNextBtn" aria-label="Proyek berikutnya">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="projects-grid" id="projectsGrid">
+        <div class="project-card fade-in">
+          <h3>Katalog Produk Berbasis Website</h3>
+          <p>Merancang dan membangun website CV. Riyadhul Bahri Reka Cipta untuk membantu perusahaan yang bergerak di bidang layanan penyediaan pakaian jadi, dan perdagangan hasil terbitan.</p>
+          <div class="project-tech"><span>PHP</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>MySql</span></div>
+          <div class="project-links"><a href="https://github.com/aaarrazi/rbrekacipta" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a><a href="https://rbrekacipta.mahalisan.com/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a></div>
+        </div>
+        <div class="project-card fade-in">
+          <h3>Model Klasifikasi Hasil Citra Berdasarkan Platform Generative AI</h3>
+          <p>Merancang model Convolutional Neural Network (CNN) yang mampu mengidentifikasi dan mengklasifikasikan citra wajah manusia hasil Generative AI berdasarkan platform pembuatnya.</p>
+          <div class="project-tech"><span>Python</span><span>TensorFlow</span><span>Keras</span><span>OpenCV</span></div>
+          <div class="project-links"></div>
+        </div>
+        <div class="project-card fade-in">
+          <h3>Sistem Informasi Desa Sukamanah</h3>
+          <p>Merancang dan membangun website resmi Desa Sukamanah yang dirancang untuk memodernisasi layanan publik, mempermudah administrasi kependudukan, serta meningkatkan transparansi informasi.</p>
+          <div class="project-tech"><span>PHP</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>MySql</span></div>
+          <div class="project-links"><a href="https://github.com/aaarrazi/sisukaweb" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
+        </div>
+        <div class="project-card fade-in">
+          <h3>Sistem Klasifikasi Citra Hasil Generate AI</h3>
+          <p>Merancang sistem yang mampu mengidentifikasi dan mengklasifikasikan citra wajah manusia hasil Generative AI berdasarkan platform pembuatnya.</p>
+          <div class="project-tech"><span>PHP</span><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <div class="project-links"></div>
+        </div>
+        <div class="project-card fade-in">
+          <h3>Website Jurnal Mahalisan Legal Development</h3>
+          <p>Merancang website jurnal berbasis OJS (Open Journal System)</p>
+          <div class="project-tech"><span>OJS (Open Journal System)</span></div>
+          <div class="project-links"><a href="https://ejournal.mahalisan.com/index.php/jml" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a></div>
+        </div>
+        <div class="project-card fade-in">
+          <h3>Website Himpunan Mahasiswa Teknik Informatika</h3>
+          <p>Merancang dan mengembangkan website sebagai sarana informasi himpunan</p>
+          <div class="project-tech"><span>PHP</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>MySql</span></div>
+          <div class="project-links"><a href="https://github.com/aaarrazi/himatifweb.git" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a><a href="https://himatifunper.ct.ws/?i=1" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="experience">
+    <div class="container">
+      <h2 class="section-title">Pengalaman &amp; Organisasi</h2>
+      <div class="experience-timeline" id="experienceTimeline">
+        <div class="experience-item fade-in">
+          <div class="experience-dot"></div>
+          <div class="experience-card">
+            <span class="experience-type internship">Magang</span>
+            <h3>Web Developer</h3>
+            <h4>CV. Riyadhul Bahri Reka Cipta</h4>
+            <span class="experience-period"><i class="fas fa-calendar-alt"></i> Januari 2025 - Juli 2025</span>
+            <p>Merancang dan membangun website CV. Riyadhul Bahri Reka Cipta untuk membantu perusahaan yang bergerak di bidang layanan penyediaan pakaian jadi, dan perdagangan hasil terbitan.</p>
+          </div>
+        </div>
+        <div class="experience-item fade-in">
+          <div class="experience-dot"></div>
+          <div class="experience-card">
+            <span class="experience-type organization">Organisasi</span>
+            <h3>Kepala Divisi Media Komunikasi dan Informasi</h3>
+            <h4>Himpunan Mahasiswa Teknik Informatika</h4>
+            <span class="experience-period"><i class="fas fa-calendar-alt"></i> 2024 - 2025</span>
+            <p>Bertanggungjawab dan memimpin anggota dalam menjalankan program kerja sebagai sarana media komunikasi dan informasi yang berkaitan dengan Teknik Informatika serta pengarsipan dokumentasi dan publikasi kegiatan melalui media sosial.</p>
+          </div>
+        </div>
+        <div class="experience-item fade-in">
+          <div class="experience-dot"></div>
+          <div class="experience-card">
+            <span class="experience-type committee">Kepanitiaan</span>
+            <h3>Publikasi Desain dan Dokumentasi</h3>
+            <h4>Acara Himpunan</h4>
+            <span class="experience-period"><i class="fas fa-calendar-alt"></i> 2024 - 2025</span>
+            <p>Bertanggung jawab penuh terhadap manajemen identitas visual, strategi publikasi, dan dokumentasi aset digital acara. Berhasil merancang seluruh materi promosi (cetak &amp; digital), mengelola dekorasi area acara, serta memimpin dokumentasi kegiatan untuk kebutuhan arsip dan publikasi pasca-acara.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates Section -->
+  <section id="certificates" class="certificates">
+    <div class="container">
+      <h2 class="section-title">Sertifikat &amp; Pelatihan</h2>
+      <div class="certificates-grid" id="certificatesGrid">
+        <article class="certificate-card fade-in">
+          <div class="certificate-header">
+            <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
+            <div>
+              <span class="certificate-type">Sertifikat</span>
+              <h3>Test of English as a Foreign Language</h3>
+            </div>
+          </div>
+          <p class="certificate-issuer">Language Center Universitas Perjuangan Tasikmalaya</p>
+          <p class="certificate-date"><i class="fas fa-calendar-alt"></i> 2026</p>
+          <p class="certificate-description"></p>
+          <a href="https://drive.google.com/file/d/10Xx_WZVtCOllc5E7_DWAG_OBBJamMI88/view?usp=drive_link" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Lihat Sertifikat</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title">Hubungi Saya</h2>
+      <div class="contact-content">
+        <div class="contact-info fade-in">
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h3>Email</h3>
+              <a href="mailto:arrazisyakir@gmail.com" id="contactEmail">arrazisyakir@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <h3>Telepon</h3>
+              <a href="tel:+6283866998256" id="contactPhone">+62 838-6699-8256</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h3>Lokasi</h3>
+              <p id="contactLocation">Tasikamalaya, Jawa barat, Indonesia.</p>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="http://www.linkedin.com/in/muhammad-arrazi-038a262a0" id="socialLinkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/Arraziii" id="socialGithub" target="_blank" rel="noopener" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://instagram.com/aaarrazi" id="socialInstagram" target="_blank" rel="noopener" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        <div class="contact-form-wrapper fade-in">
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="formName">Nama</label>
+              <input type="text" id="formName" name="name" placeholder="Nama lengkap Anda" required>
+            </div>
+            <div class="form-group">
+              <label for="formEmail">Email</label>
+              <input type="email" id="formEmail" name="email" placeholder="email@contoh.com" required>
+            </div>
+            <div class="form-group">
+              <label for="formMessage">Pesan</label>
+              <textarea id="formMessage" name="message" placeholder="Tulis pesan Anda di sini..." rows="5" required></textarea>
+            </div>
+            <button type="submit" class="cta-button submit-btn">
+              <i class="fas fa-paper-plane"></i> Kirim Pesan
+            </button>
+          </form>
+          <div id="formNotification" class="form-notification"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Muhammad Arrazi. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
