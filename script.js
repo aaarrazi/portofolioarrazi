@@ -57,7 +57,8 @@ function setupMobileMenu() {
     btn.style.transitionDelay = (0.04 * i) + 's';
     btn.title = label;
     btn.setAttribute('aria-label', label);
-    btn.innerHTML = '<i class="' + (ICONS[href] || 'fas fa-circle') + '"></i>';
+    btn.innerHTML = '<span class="wheel-icon"><i class="' + (ICONS[href] || 'fas fa-circle') + '"></i></span>'
+      + '<span class="wheel-label">' + label + '</span>';
     btn.addEventListener('mouseenter', () => { if (title) title.textContent = label; });
     btn.addEventListener('focus', () => { if (title) title.textContent = label; });
     btn.addEventListener('click', () => {
