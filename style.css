@@ -193,25 +193,23 @@ ul {
   display: none;
 }
 
-/* Fallback global agar ikon + nama selalu tampil & rapi walau di luar media query */
+/* Fallback global: gaya cincin donat seperti referensi */
 .radial-wheel .wheel-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 3px;
   background: transparent;
   border: none;
   cursor: pointer;
 }
 
 .radial-wheel .wheel-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid rgba(139, 109, 255, 0.55);
-  background: #241d4d;
-  color: #fff;
-  font-size: 1.1rem;
+  background: transparent;
+  border: none;
+  color: #ececf1;
+  font-size: 1.25rem;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -220,14 +218,14 @@ ul {
 .radial-wheel .wheel-label {
   display: inline-block;
   white-space: nowrap;
-  font-size: 0.66rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   line-height: 1.2;
-  color: #fff;
-  background: rgba(11, 11, 22, 0.95);
-  border: 1px solid rgba(139, 109, 255, 0.55);
-  border-radius: 999px;
-  padding: 4px 10px;
+  color: #c9c9d4;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 /* ==========================================
@@ -1097,9 +1095,9 @@ footer {
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    background: rgba(8, 8, 18, 0.72);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -1110,24 +1108,48 @@ footer {
     visibility: visible;
   }
 
+  /* Cincin donat seperti referensi: 7 segmen abu gelap, tengah bolong */
   .radial-wheel {
-    --wheel-size: min(86vw, 360px);
-    --orbit: calc(var(--wheel-size) / 2 - 54px);
+    --wheel-size: min(86vw, 340px);
+    --orbit: calc(var(--wheel-size) / 2 - 34px);
     position: relative;
     width: var(--wheel-size);
     height: var(--wheel-size);
     border-radius: 50%;
-    border: 6px solid #2e2e42;
-    box-shadow: 0 0 0 1px rgba(124, 93, 250, 0.35), 0 20px 80px rgba(0, 0, 0, 0.6);
-    background:
-      radial-gradient(circle, #0f0f1a 0 30%, transparent 30.5%),
-      conic-gradient(from -90deg,
-        #1c1338 0 51.43deg, #241847 51.43deg 102.86deg,
-        #1c1338 102.86deg 154.29deg, #241847 154.29deg 205.72deg,
-        #1c1338 205.72deg 257.15deg, #241847 257.15deg 308.58deg,
-        #1c1338 308.58deg 360deg);
+    background: transparent;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
     transform: scale(0.6);
     transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Lapisan gelang donat (di belakang ikon) */
+  .radial-wheel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from -90deg,
+      #33333d 0 51.43deg, #2b2b33 51.43deg 102.86deg,
+      #33333d 102.86deg 154.29deg, #2b2b33 154.29deg 205.72deg,
+      #33333d 205.72deg 257.15deg, #2b2b33 257.15deg 308.58deg,
+      #33333d 308.58deg 360deg);
+    -webkit-mask: radial-gradient(circle, transparent 0 59%, #000 60%);
+    mask: radial-gradient(circle, transparent 0 59%, #000 60%);
+    z-index: 0;
+  }
+
+  /* Aksen biru di segmen atas seperti referensi */
+  .radial-wheel::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 50%;
+    width: 15%;
+    height: 5px;
+    border-radius: 99px;
+    background: #2f9bff;
+    transform: translateX(-50%);
+    z-index: 3;
   }
 
   .radial-overlay.active .radial-wheel {
@@ -1140,23 +1162,20 @@ footer {
     border-radius: 50%;
     pointer-events: none;
     background: repeating-conic-gradient(from -90deg,
-      transparent 0 51deg, rgba(139, 109, 255, 0.65) 51deg 51.43deg);
-    -webkit-mask: radial-gradient(circle, transparent 29%, #000 30%, #000 100%);
-    mask: radial-gradient(circle, transparent 29%, #000 30%, #000 100%);
+      transparent 0 51.05deg, rgba(0, 0, 0, 0.55) 51.05deg 51.43deg);
+    -webkit-mask: radial-gradient(circle, transparent 0 59%, #000 60%);
+    mask: radial-gradient(circle, transparent 0 59%, #000 60%);
+    z-index: 1;
   }
 
+  /* Tengah bolong: hanya teks, tanpa lingkaran solid */
   .radial-center {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 30%;
-    height: 30%;
-    min-width: 92px;
-    min-height: 92px;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: #0b0b16;
-    border: 2px solid #2e2e42;
+    background: transparent;
+    border: none;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1164,33 +1183,37 @@ footer {
     text-align: center;
     padding: 0.5rem;
     gap: 2px;
+    pointer-events: none;
+    z-index: 2;
   }
 
   .radial-center strong {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     font-weight: 700;
     line-height: 1.25;
+    color: #fff;
   }
 
   .radial-center span {
     font-size: 0.64rem;
-    color: var(--text-secondary);
+    color: #8e8e99;
   }
 
   .wheel-item {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 78px;
-    margin: -34px 0 0 -39px;
+    width: 64px;
+    margin: -28px 0 0 -32px;
     padding: 0;
     background: transparent;
     border: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 3px;
     cursor: pointer;
+    z-index: 2;
     transform: rotate(var(--a)) translate(var(--orbit)) rotate(calc(var(--a) * -1)) scale(0.4);
     opacity: 0;
     transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
@@ -1202,18 +1225,16 @@ footer {
   }
 
   .wheel-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 1px solid rgba(139, 109, 255, 0.55);
-    background: #241d4d;
-    color: #fff;
-    font-size: 1.1rem;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: #ececf1;
+    font-size: 1.25rem;
+    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
   }
 
   .wheel-label {
@@ -1222,28 +1243,28 @@ footer {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 0.66rem;
-    font-weight: 600;
+    font-size: 0.6rem;
+    font-weight: 500;
     line-height: 1.2;
-    letter-spacing: 0.01em;
-    color: var(--text);
-    background: rgba(11, 11, 22, 0.92);
-    border: 1px solid rgba(139, 109, 255, 0.4);
-    border-radius: 999px;
-    padding: 4px 10px;
+    letter-spacing: 0.02em;
+    color: #c9c9d4;
+    background: transparent;
+    border: none;
+    padding: 0;
   }
 
   .wheel-item:hover .wheel-icon,
   .wheel-item:focus-visible .wheel-icon,
   .wheel-item.active-seg .wheel-icon {
-    background: #7b5cff;
-    border-color: #7b5cff;
-    transform: scale(1.06);
+    color: #5aa9ff;
+    background: transparent;
+    border: none;
+    transform: scale(1.12);
   }
 
   .wheel-item:hover .wheel-label,
   .wheel-item:focus-visible .wheel-label {
-    border-color: #7b5cff;
+    color: #fff;
   }
 
   .wheel-item:focus-visible {
@@ -1300,24 +1321,21 @@ footer {
 
 @media (max-width: 480px) {
   .radial-wheel {
-    --wheel-size: min(92vw, 310px);
-    --orbit: calc(var(--wheel-size) / 2 - 50px);
+    --wheel-size: min(92vw, 300px);
+    --orbit: calc(var(--wheel-size) / 2 - 30px);
   }
 
   .wheel-item {
-    width: 70px;
-    margin: -31px 0 0 -35px;
+    width: 60px;
+    margin: -26px 0 0 -30px;
   }
 
   .wheel-icon {
-    width: 44px;
-    height: 44px;
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
   .wheel-label {
-    font-size: 0.6rem;
-    padding: 3px 8px;
+    font-size: 0.55rem;
   }
 
   .radial-center strong {
