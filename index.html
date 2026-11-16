@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -31,10 +31,31 @@
     </ul>
   </nav>
 
-  <!-- Radial Wheel Menu (mobile) : tombol dibuat otomatis dari .nav-links via script.js -->
+  <!-- Radial Wheel Menu (mobile) : item statis agar nama selalu tampil -->
   <div class="radial-overlay" id="radialOverlay" aria-hidden="true">
     <div class="radial-wheel" id="radialWheel" role="menu" aria-label="Navigasi utama">
       <div class="radial-dividers" aria-hidden="true"></div>
+      <button type="button" class="wheel-item" role="menuitem" data-target="#hero" style="--a:-64.29deg; transition-delay:0s" aria-label="Beranda" title="Beranda">
+        <span class="wheel-icon"><i class="fas fa-home"></i></span><span class="wheel-label">Beranda</span>
+      </button>
+      <button type="button" class="wheel-item" role="menuitem" data-target="#about" style="--a:-12.86deg; transition-delay:0.04s" aria-label="Tentang" title="Tentang">
+        <span class="wheel-icon"><i class="fas fa-user"></i></span><span class="wheel-label">Tentang</span>
+      </button>
+      <button type="button" class="wheel-item" role="menuitem" data-target="#skills" style="--a:38.57deg; transition-delay:0.08s" aria-label="Keterampilan" title="Keterampilan">
+        <span class="wheel-icon"><i class="fas fa-code"></i></span><span class="wheel-label">Keterampilan</span>
+      </button>
+      <button type="button" class="wheel-item" role="menuitem" data-target="#projects" style="--a:90deg; transition-delay:0.12s" aria-label="Proyek" title="Proyek">
+        <span class="wheel-icon"><i class="fas fa-folder-open"></i></span><span class="wheel-label">Proyek</span>
+      </button>
+      <button type="button" class="wheel-item" role="menuitem" data-target="#experience" style="--a:141.43deg; transition-delay:0.16s" aria-label="Pengalaman" title="Pengalaman">
+        <span class="wheel-icon"><i class="fas fa-briefcase"></i></span><span class="wheel-label">Pengalaman</span>
+      </button>
+      <button type="button" class="wheel-item" role="menuitem" data-target="#certificates" style="--a:192.86deg; transition-delay:0.2s" aria-label="Sertifikat" title="Sertifikat">
+        <span class="wheel-icon"><i class="fas fa-certificate"></i></span><span class="wheel-label">Sertifikat</span>
+      </button>
+      <button type="button" class="wheel-item" role="menuitem" data-target="#contact" style="--a:244.29deg; transition-delay:0.24s" aria-label="Kontak" title="Kontak">
+        <span class="wheel-icon"><i class="fas fa-envelope"></i></span><span class="wheel-label">Kontak</span>
+      </button>
       <div class="radial-center">
         <strong id="radialTitle">Menu</strong>
         <span>Esc menutup</span>
@@ -333,6 +354,6 @@
     <p>&copy; 2026 Muhammad Arrazi. All rights reserved.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

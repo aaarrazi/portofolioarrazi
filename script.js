@@ -22,53 +22,15 @@ function setupNavbar() {
   });
 }
 
-// --- Mobile Menu (Radial Wheel seperti referensi) ---
+// --- Mobile Menu (Radial Wheel: item statis di HTML) ---
 function setupMobileMenu() {
   const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
   const overlay = document.getElementById('radialOverlay');
   const wheel = document.getElementById('radialWheel');
   const title = document.getElementById('radialTitle');
-  if (!hamburger || !navLinks || !overlay || !wheel) return;
+  if (!hamburger || !overlay || !wheel) return;
 
-  const ICONS = {
-    '#hero': 'fas fa-home',
-    '#about': 'fas fa-user',
-    '#skills': 'fas fa-code',
-    '#projects': 'fas fa-folder-open',
-    '#experience': 'fas fa-briefcase',
-    '#certificates': 'fas fa-certificate',
-    '#contact': 'fas fa-envelope'
-  };
-
-  const links = Array.from(navLinks.querySelectorAll('a'));
-  const total = links.length;
-
-  // Bangun tombol wheel dari <ul> yang sama (satu sumber data)
-  links.forEach((link, i) => {
-    const href = link.getAttribute('href');
-    const label = link.textContent.trim();
-    const angle = -90 + (i + 0.5) * (360 / total);
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'wheel-item';
-    btn.setAttribute('role', 'menuitem');
-    btn.style.setProperty('--a', angle + 'deg');
-    btn.style.transitionDelay = (0.04 * i) + 's';
-    btn.title = label;
-    btn.setAttribute('aria-label', label);
-    btn.innerHTML = '<span class="wheel-icon"><i class="' + (ICONS[href] || 'fas fa-circle') + '"></i></span>'
-      + '<span class="wheel-label">' + label + '</span>';
-    btn.addEventListener('mouseenter', () => { if (title) title.textContent = label; });
-    btn.addEventListener('focus', () => { if (title) title.textContent = label; });
-    btn.addEventListener('click', () => {
-      closeMenu();
-      const target = document.querySelector(href);
-      if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 60);
-      else window.location.hash = href;
-    });
-    wheel.appendChild(btn);
-  });
+  const items = Array.from(wheel.querySelectorAll('.wheel-item'));
 
   const openMenu = () => {
     overlay.classList.add('active');
@@ -86,6 +48,19 @@ function setupMobileMenu() {
     overlay.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('menu-open');
   };
+
+  items.forEach((btn) => {
+    const target = btn.getAttribute('data-target');
+    const label = btn.getAttribute('aria-label') || btn.textContent.trim();
+    btn.addEventListener('mouseenter', () => { if (title) title.textContent = label; });
+    btn.addEventListener('focus', () => { if (title) title.textContent = label; });
+    btn.addEventListener('click', () => {
+      closeMenu();
+      const el = target ? document.querySelector(target) : null;
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 60);
+      else if (target) window.location.hash = target;
+    });
+  });
 
   hamburger.addEventListener('click', (e) => {
     e.stopPropagation();

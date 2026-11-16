@@ -193,6 +193,43 @@ ul {
   display: none;
 }
 
+/* Fallback global agar ikon + nama selalu tampil & rapi walau di luar media query */
+.radial-wheel .wheel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.radial-wheel .wheel-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(139, 109, 255, 0.55);
+  background: #241d4d;
+  color: #fff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radial-wheel .wheel-label {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  background: rgba(11, 11, 22, 0.95);
+  border: 1px solid rgba(139, 109, 255, 0.55);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
 /* ==========================================
    Hero Section
    ========================================== */
