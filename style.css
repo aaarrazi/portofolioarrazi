@@ -1032,33 +1032,98 @@ footer {
     font-size: 1.25rem;
   }
 
-  /* Navbar mobile */
+  /* Navbar mobile -> Radial Menu */
   .hamburger {
     display: flex;
   }
 
   .nav-links {
     position: fixed;
-    top: 0;
-    right: -100%;
-    width: min(82vw, 300px);
-    height: 100vh;
-    background: var(--primary);
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
-    padding: 2rem;
-    transition: right 0.3s ease;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    top: 56px;
+    right: 0;
+    width: 280px;
+    height: 300px;
+    display: block;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* Panel kipas quarter-circle */
+  .nav-links::before {
+    content: '';
+    position: absolute;
+    top: -70px;
+    right: -70px;
+    width: 330px;
+    height: 330px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 72% 28%, rgba(34, 34, 64, 0.98) 0%, rgba(26, 26, 46, 0.96) 42%, rgba(15, 15, 26, 0.88) 62%, transparent 72%);
+    border: 1px solid rgba(233, 69, 96, 0.18);
+    transform: scale(0);
+    transform-origin: top right;
+    transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
   }
 
   .nav-links.active {
-    right: 0;
+    pointer-events: auto;
   }
 
+  .nav-links.active::before {
+    transform: scale(1);
+  }
+
+  .nav-links li {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    opacity: 0;
+    transform: translate(0, 0) scale(0.4);
+    transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  }
+
+  .nav-links.active li {
+    opacity: 1;
+  }
+
+  /* Kipas radial: sudut 180deg -> 90deg, radius ~150px */
+  .nav-links.active li:nth-child(1) { transform: translate(-152px, 6px) scale(1); transition-delay: 0.05s; }
+  .nav-links.active li:nth-child(2) { transform: translate(-144px, 44px) scale(1); transition-delay: 0.09s; }
+  .nav-links.active li:nth-child(3) { transform: translate(-127px, 80px) scale(1); transition-delay: 0.13s; }
+  .nav-links.active li:nth-child(4) { transform: translate(-102px, 110px) scale(1); transition-delay: 0.17s; }
+  .nav-links.active li:nth-child(5) { transform: translate(-70px, 133px) scale(1); transition-delay: 0.21s; }
+  .nav-links.active li:nth-child(6) { transform: translate(-34px, 149px) scale(1); transition-delay: 0.25s; }
+  .nav-links.active li:nth-child(7) { transform: translate(0, 156px) scale(1); transition-delay: 0.29s; }
+
   .nav-links a {
-    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 0.88rem;
+    font-weight: 600;
     color: var(--text);
+    background: rgba(34, 34, 64, 0.92);
+    border: 1px solid rgba(233, 69, 96, 0.28);
+    padding: 10px 16px;
+    border-radius: 999px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:active {
+    background: var(--gradient);
+    border-color: transparent;
+    color: #fff;
   }
 
   /* Hero */
@@ -1110,6 +1175,32 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .nav-links {
+    width: 230px;
+    height: 250px;
+  }
+
+  .nav-links::before {
+    width: 270px;
+    height: 270px;
+    top: -60px;
+    right: -60px;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    padding: 9px 14px;
+  }
+
+  /* Radius lebih kecil agar muat di layar kecil */
+  .nav-links.active li:nth-child(1) { transform: translate(-118px, 4px) scale(1); }
+  .nav-links.active li:nth-child(2) { transform: translate(-112px, 34px) scale(1); }
+  .nav-links.active li:nth-child(3) { transform: translate(-99px, 62px) scale(1); }
+  .nav-links.active li:nth-child(4) { transform: translate(-79px, 86px) scale(1); }
+  .nav-links.active li:nth-child(5) { transform: translate(-54px, 104px) scale(1); }
+  .nav-links.active li:nth-child(6) { transform: translate(-26px, 116px) scale(1); }
+  .nav-links.active li:nth-child(7) { transform: translate(0, 122px) scale(1); }
+
   .hero {
     padding-left: 1rem;
     padding-right: 1rem;
