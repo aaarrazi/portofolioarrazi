@@ -22,39 +22,87 @@ function setupNavbar() {
   });
 }
 
-// --- Mobile Menu (Radial) ---
+// --- Mobile Menu (Radial Wheel seperti referensi) ---
 function setupMobileMenu() {
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
-  if (!hamburger || !navLinks) return;
+  const overlay = document.getElementById('radialOverlay');
+  const wheel = document.getElementById('radialWheel');
+  const title = document.getElementById('radialTitle');
+  if (!hamburger || !navLinks || !overlay || !wheel) return;
+
+  const ICONS = {
+    '#hero': 'fas fa-home',
+    '#about': 'fas fa-user',
+    '#skills': 'fas fa-code',
+    '#projects': 'fas fa-folder-open',
+    '#experience': 'fas fa-briefcase',
+    '#certificates': 'fas fa-certificate',
+    '#contact': 'fas fa-envelope'
+  };
+
+  const links = Array.from(navLinks.querySelectorAll('a'));
+  const total = links.length;
+
+  // Bangun tombol wheel dari <ul> yang sama (satu sumber data)
+  links.forEach((link, i) => {
+    const href = link.getAttribute('href');
+    const label = link.textContent.trim();
+    const angle = -90 + (i + 0.5) * (360 / total);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'wheel-item';
+    btn.setAttribute('role', 'menuitem');
+    btn.style.setProperty('--a', angle + 'deg');
+    btn.style.transitionDelay = (0.04 * i) + 's';
+    btn.title = label;
+    btn.setAttribute('aria-label', label);
+    btn.innerHTML = '<i class="' + (ICONS[href] || 'fas fa-circle') + '"></i>';
+    btn.addEventListener('mouseenter', () => { if (title) title.textContent = label; });
+    btn.addEventListener('focus', () => { if (title) title.textContent = label; });
+    btn.addEventListener('click', () => {
+      closeMenu();
+      const target = document.querySelector(href);
+      if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 60);
+      else window.location.hash = href;
+    });
+    wheel.appendChild(btn);
+  });
+
+  const openMenu = () => {
+    overlay.classList.add('active');
+    hamburger.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('menu-open');
+    if (title) title.textContent = 'Menu';
+  };
 
   const closeMenu = () => {
+    overlay.classList.remove('active');
     hamburger.classList.remove('active');
-    navLinks.classList.remove('active');
     hamburger.setAttribute('aria-expanded', 'false');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('menu-open');
   };
 
   hamburger.addEventListener('click', (e) => {
     e.stopPropagation();
-    const isOpen = navLinks.classList.toggle('active');
-    hamburger.classList.toggle('active', isOpen);
-    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    if (overlay.classList.contains('active')) closeMenu();
+    else openMenu();
   });
 
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeMenu();
   });
 
-  // Klik di luar radial -> tutup
-  document.addEventListener('click', (e) => {
-    if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-      closeMenu();
-    }
-  });
-
-  // Escape -> tutup
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu();
+  });
+
+  // Jika resize ke desktop, pastikan overlay tertutup
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) closeMenu();
   });
 }
 

@@ -187,6 +187,13 @@ ul {
 }
 
 /* ==========================================
+   Radial Wheel Menu (mobile only, hidden on desktop)
+   ========================================== */
+.radial-overlay {
+  display: none;
+}
+
+/* ==========================================
    Hero Section
    ========================================== */
 .hero {
@@ -1032,98 +1039,137 @@ footer {
     font-size: 1.25rem;
   }
 
-  /* Navbar mobile -> Radial Menu */
+  /* Mobile: sidebar lama dimatikan, diganti wheel */
   .hamburger {
     display: flex;
   }
 
   .nav-links {
+    display: none !important;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .radial-overlay {
+    display: flex;
     position: fixed;
-    top: 56px;
-    right: 0;
-    width: 280px;
-    height: 300px;
-    display: block;
-    padding: 0;
-    margin: 0;
-    background: transparent;
-    box-shadow: none;
-    pointer-events: none;
-    z-index: 1000;
+    inset: 0;
+    z-index: 990;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(8, 8, 18, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 
-  /* Panel kipas quarter-circle */
-  .nav-links::before {
-    content: '';
-    position: absolute;
-    top: -70px;
-    right: -70px;
-    width: 330px;
-    height: 330px;
+  .radial-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .radial-wheel {
+    --wheel-size: min(84vw, 340px);
+    --orbit: calc(var(--wheel-size) / 2 - 38px);
+    position: relative;
+    width: var(--wheel-size);
+    height: var(--wheel-size);
     border-radius: 50%;
+    border: 6px solid #2e2e42;
+    box-shadow: 0 0 0 1px rgba(124, 93, 250, 0.35), 0 20px 80px rgba(0, 0, 0, 0.6);
     background:
-      radial-gradient(circle at 72% 28%, rgba(34, 34, 64, 0.98) 0%, rgba(26, 26, 46, 0.96) 42%, rgba(15, 15, 26, 0.88) 62%, transparent 72%);
-    border: 1px solid rgba(233, 69, 96, 0.18);
-    transform: scale(0);
-    transform-origin: top right;
-    transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+      radial-gradient(circle, #0f0f1a 0 33%, transparent 33.5%),
+      conic-gradient(from -90deg,
+        #1c1338 0 51.43deg, #241847 51.43deg 102.86deg,
+        #1c1338 102.86deg 154.29deg, #241847 154.29deg 205.72deg,
+        #1c1338 205.72deg 257.15deg, #241847 257.15deg 308.58deg,
+        #1c1338 308.58deg 360deg);
+    transform: scale(0.6);
+    transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .nav-links.active {
-    pointer-events: auto;
-  }
-
-  .nav-links.active::before {
+  .radial-overlay.active .radial-wheel {
     transform: scale(1);
   }
 
-  .nav-links li {
+  .radial-dividers {
     position: absolute;
-    top: 14px;
-    right: 16px;
-    opacity: 0;
-    transform: translate(0, 0) scale(0.4);
-    transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: repeating-conic-gradient(from -90deg,
+      transparent 0 51deg, rgba(139, 109, 255, 0.65) 51deg 51.43deg);
+    -webkit-mask: radial-gradient(circle, transparent 32%, #000 33%, #000 100%);
+    mask: radial-gradient(circle, transparent 32%, #000 33%, #000 100%);
   }
 
-  .nav-links.active li {
-    opacity: 1;
-  }
-
-  /* Kipas radial: sudut 180deg -> 90deg, radius ~150px */
-  .nav-links.active li:nth-child(1) { transform: translate(-152px, 6px) scale(1); transition-delay: 0.05s; }
-  .nav-links.active li:nth-child(2) { transform: translate(-144px, 44px) scale(1); transition-delay: 0.09s; }
-  .nav-links.active li:nth-child(3) { transform: translate(-127px, 80px) scale(1); transition-delay: 0.13s; }
-  .nav-links.active li:nth-child(4) { transform: translate(-102px, 110px) scale(1); transition-delay: 0.17s; }
-  .nav-links.active li:nth-child(5) { transform: translate(-70px, 133px) scale(1); transition-delay: 0.21s; }
-  .nav-links.active li:nth-child(6) { transform: translate(-34px, 149px) scale(1); transition-delay: 0.25s; }
-  .nav-links.active li:nth-child(7) { transform: translate(0, 156px) scale(1); transition-delay: 0.29s; }
-
-  .nav-links a {
-    display: inline-flex;
+  .radial-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 35%;
+    height: 35%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: #0b0b16;
+    border: 2px solid #2e2e42;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    white-space: nowrap;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--text);
-    background: rgba(34, 34, 64, 0.92);
-    border: 1px solid rgba(233, 69, 96, 0.28);
-    padding: 10px 16px;
-    border-radius: 999px;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    justify-content: center;
+    text-align: center;
+    padding: 0.5rem;
+    gap: 2px;
   }
 
-  .nav-links a::after {
-    display: none;
+  .radial-center strong {
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.25;
   }
 
-  .nav-links a:hover,
-  .nav-links a:active {
-    background: var(--gradient);
-    border-color: transparent;
+  .radial-center span {
+    font-size: 0.66rem;
+    color: var(--text-secondary);
+  }
+
+  .wheel-item {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 52px;
+    height: 52px;
+    margin: -26px 0 0 -26px;
+    border-radius: 50%;
+    border: 1px solid rgba(139, 109, 255, 0.5);
+    background: #241d4d;
     color: #fff;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transform: rotate(var(--a)) translate(var(--orbit)) rotate(calc(var(--a) * -1)) scale(0.4);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease, background 0.2s ease;
+  }
+
+  .radial-overlay.active .wheel-item {
+    opacity: 1;
+    transform: rotate(var(--a)) translate(var(--orbit)) rotate(calc(var(--a) * -1)) scale(1);
+  }
+
+  .wheel-item:hover,
+  .wheel-item:focus-visible,
+  .wheel-item.active-seg {
+    background: #7b5cff;
+    border-color: #7b5cff;
+    outline: none;
   }
 
   /* Hero */
@@ -1175,31 +1221,21 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .nav-links {
-    width: 230px;
-    height: 250px;
+  .radial-wheel {
+    --wheel-size: min(88vw, 300px);
+    --orbit: calc(var(--wheel-size) / 2 - 32px);
   }
 
-  .nav-links::before {
-    width: 270px;
-    height: 270px;
-    top: -60px;
-    right: -60px;
+  .wheel-item {
+    width: 46px;
+    height: 46px;
+    margin: -23px 0 0 -23px;
+    font-size: 1rem;
   }
 
-  .nav-links a {
-    font-size: 0.82rem;
-    padding: 9px 14px;
+  .radial-center strong {
+    font-size: 0.78rem;
   }
-
-  /* Radius lebih kecil agar muat di layar kecil */
-  .nav-links.active li:nth-child(1) { transform: translate(-118px, 4px) scale(1); }
-  .nav-links.active li:nth-child(2) { transform: translate(-112px, 34px) scale(1); }
-  .nav-links.active li:nth-child(3) { transform: translate(-99px, 62px) scale(1); }
-  .nav-links.active li:nth-child(4) { transform: translate(-79px, 86px) scale(1); }
-  .nav-links.active li:nth-child(5) { transform: translate(-54px, 104px) scale(1); }
-  .nav-links.active li:nth-child(6) { transform: translate(-26px, 116px) scale(1); }
-  .nav-links.active li:nth-child(7) { transform: translate(0, 122px) scale(1); }
 
   .hero {
     padding-left: 1rem;
