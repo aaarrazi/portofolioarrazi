@@ -345,11 +345,23 @@ footer { border-top: 1px solid var(--line-soft); padding: 1.6rem 0; }
   .certificates .project-dots button::after { background: #d4d4d8; }
   .certificates .project-dots button.active::after { background: #111; }
 
+  /* Pengalaman mobile: carousel geser, garis timeline disembunyikan */
+  .experience-timeline {
+    border-left: none; padding-left: 0;
+    display: flex; overflow-x: auto; gap: .9rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 calc(-1 * clamp(1.25rem, 4vw, 2rem));
+    padding: 0 clamp(1.25rem, 4vw, 2rem) .5rem;
+  }
+  .experience-timeline::-webkit-scrollbar { display: none; }
+  .experience-item { flex: 0 0 84%; width: auto; padding: 0; scroll-snap-align: center; }
+  .experience-dot { display: none; }
+
   .skills-grid, .contact-grid { grid-template-columns: 1fr; }
   .projects-head { flex-direction: column; align-items: start; gap: 1rem; }
   .cta-button, .ghost-button { width: 100%; justify-content: center; }
-  .experience-timeline { padding-left: 1.4rem; }
-  .experience-dot { left: -1.4rem; }
   .about, .skills, .projects, .experience, .certificates, .contact { padding: 4.5rem 0; }
 }
 @media (prefers-reduced-motion: reduce) {

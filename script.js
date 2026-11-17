@@ -47,6 +47,7 @@ function setupRailToggle() {
 function setupProjectDots() {
   setupCarouselDots('projectsGrid', 'projectDots');
   setupCarouselDots('certificatesGrid', 'certificateDots');
+  setupCarouselDots('experienceTimeline', 'experienceDots');
 }
 
 function setupCarouselDots(gridId, dotsId) {
