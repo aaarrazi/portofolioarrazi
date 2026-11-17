@@ -20,11 +20,6 @@
   <!-- Navbar -->
   <header class="navbar" id="navbar">
     <a href="#hero" class="logo">ARRAZI<span>.</span></a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
     <nav aria-label="Navigasi utama">
       <ul class="nav-links" id="navLinks">
         <li><a href="#hero" data-nav="hero">Beranda</a></li>
@@ -37,37 +32,6 @@
       </ul>
     </nav>
   </header>
-
-  <!-- Radial Wheel Menu (mobile) -->
-  <div class="radial-overlay" id="radialOverlay" aria-hidden="true">
-    <div class="radial-wheel" id="radialWheel" role="menu" aria-label="Navigasi utama">
-      <div class="radial-dividers" aria-hidden="true"></div>
-      <button type="button" class="wheel-item" role="menuitem" data-target="#hero" style="--a:-64.29deg; transition-delay:0s" aria-label="Beranda" title="Beranda">
-        <span class="wheel-icon"><i class="fas fa-home" aria-hidden="true"></i></span><span class="wheel-label">Beranda</span>
-      </button>
-      <button type="button" class="wheel-item" role="menuitem" data-target="#about" style="--a:-12.86deg; transition-delay:0.04s" aria-label="Tentang" title="Tentang">
-        <span class="wheel-icon"><i class="fas fa-user" aria-hidden="true"></i></span><span class="wheel-label">Tentang</span>
-      </button>
-      <button type="button" class="wheel-item" role="menuitem" data-target="#skills" style="--a:38.57deg; transition-delay:0.08s" aria-label="Skill" title="Skill">
-        <span class="wheel-icon"><i class="fas fa-code" aria-hidden="true"></i></span><span class="wheel-label">Skill</span>
-      </button>
-      <button type="button" class="wheel-item" role="menuitem" data-target="#projects" style="--a:90deg; transition-delay:0.12s" aria-label="Proyek" title="Proyek">
-        <span class="wheel-icon"><i class="fas fa-folder-open" aria-hidden="true"></i></span><span class="wheel-label">Proyek</span>
-      </button>
-      <button type="button" class="wheel-item" role="menuitem" data-target="#experience" style="--a:141.43deg; transition-delay:0.16s" aria-label="Pengalaman" title="Pengalaman">
-        <span class="wheel-icon"><i class="fas fa-briefcase" aria-hidden="true"></i></span><span class="wheel-label">Pengalaman</span>
-      </button>
-      <button type="button" class="wheel-item" role="menuitem" data-target="#certificates" style="--a:192.86deg; transition-delay:0.2s" aria-label="Sertifikat" title="Sertifikat">
-        <span class="wheel-icon"><i class="fas fa-certificate" aria-hidden="true"></i></span><span class="wheel-label">Sertifikat</span>
-      </button>
-      <button type="button" class="wheel-item" role="menuitem" data-target="#contact" style="--a:244.29deg; transition-delay:0.24s" aria-label="Kontak" title="Kontak">
-        <span class="wheel-icon"><i class="fas fa-envelope" aria-hidden="true"></i></span><span class="wheel-label">Kontak</span>
-      </button>
-      <div class="radial-center">
-        <strong id="radialTitle">Menu</strong>
-      </div>
-    </div>
-  </div>
 
   <main>
   <!-- Hero Section -->
@@ -247,6 +211,8 @@
           <div class="project-links"><a href="https://github.com/aaarrazi/himatifweb.git" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a><a href="https://himatifunper.ct.ws/?i=1" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo</a></div>
         </article>
       </div>
+      <p class="swipe-hint" aria-hidden="true"><i class="fas fa-arrows-left-right" aria-hidden="true"></i> Geser untuk melihat proyek lain</p>
+      <div class="project-dots" id="projectDots" role="tablist" aria-label="Navigasi proyek"></div>
     </div>
   </section>
 
@@ -410,6 +376,15 @@
       <a href="#hero" class="to-top magnetic" aria-label="Kembali ke atas"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
     </div>
   </footer>
+
+  <!-- Bottom tab bar: navigasi khusus mobile -->
+  <nav class="mobile-tabbar" aria-label="Navigasi cepat">
+    <a href="#hero" data-nav="hero" aria-label="Beranda"><i class="fas fa-home" aria-hidden="true"></i><span>Beranda</span></a>
+    <a href="#skills" data-nav="skills" aria-label="Skill"><i class="fas fa-code" aria-hidden="true"></i><span>Skill</span></a>
+    <a href="#projects" data-nav="projects" aria-label="Proyek"><i class="fas fa-folder-open" aria-hidden="true"></i><span>Proyek</span></a>
+    <a href="#experience" data-nav="experience" aria-label="Pengalaman"><i class="fas fa-briefcase" aria-hidden="true"></i><span>Karier</span></a>
+    <a href="#contact" data-nav="contact" aria-label="Kontak"><i class="fas fa-envelope" aria-hidden="true"></i><span>Kontak</span></a>
+  </nav>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js" defer></script>
   <script src="script.js?v=5" defer></script>

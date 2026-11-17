@@ -1,8 +1,8 @@
-// Portfolio interaksi: kursor, progress, reveal, tilt 3D, magnetik, objek 3D, menu.
+// Portfolio interaksi: kursor, progress, reveal, tilt 3D, magnetik, objek 3D, tab bar mobile.
 document.addEventListener('DOMContentLoaded', () => {
   setupNavbar();
-  setupMobileMenu();
   setupSmoothScroll();
+  setupProjectDots();
   setupScrollAnimations();
   setupScrollProgress();
   setupActiveNav();
@@ -22,47 +22,36 @@ function setupNavbar() {
   onScroll();
 }
 
-function setupMobileMenu() {
-  const hamburger = document.getElementById('hamburger');
-  const overlay = document.getElementById('radialOverlay');
-  const wheel = document.getElementById('radialWheel');
-  const title = document.getElementById('radialTitle');
-  if (!hamburger || !overlay || !wheel) return;
-  const items = Array.from(wheel.querySelectorAll('.wheel-item'));
-  const openMenu = () => {
-    overlay.classList.add('active');
-    hamburger.classList.add('active');
-    hamburger.setAttribute('aria-expanded', 'true');
-    overlay.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('menu-open');
-    if (title) title.textContent = 'Menu';
-  };
-  const closeMenu = () => {
-    overlay.classList.remove('active');
-    hamburger.classList.remove('active');
-    hamburger.setAttribute('aria-expanded', 'false');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('menu-open');
-  };
-  items.forEach((btn) => {
-    const target = btn.getAttribute('data-target');
-    const label = btn.getAttribute('aria-label') || btn.textContent.trim();
-    btn.addEventListener('mouseenter', () => { if (title) title.textContent = label; });
-    btn.addEventListener('focus', () => { if (title) title.textContent = label; });
-    btn.addEventListener('click', () => {
-      closeMenu();
-      const el = target ? document.querySelector(target) : null;
-      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 60);
+// Titik navigasi carousel proyek (khusus mobile, disembunyikan di desktop via CSS).
+function setupProjectDots() {
+  const grid = document.getElementById('projectsGrid');
+  const dotsWrap = document.getElementById('projectDots');
+  if (!grid || !dotsWrap) return;
+  const cards = Array.from(grid.children);
+  if (!cards.length) return;
+  cards.forEach((card, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', 'Lihat proyek ' + (i + 1));
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => {
+      grid.scrollTo({ left: card.offsetLeft - grid.offsetLeft, behavior: 'smooth' });
     });
+    dotsWrap.appendChild(dot);
   });
-  hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (overlay.classList.contains('active')) closeMenu();
-    else openMenu();
-  });
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeMenu(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
-  window.addEventListener('resize', () => { if (window.innerWidth > 768) closeMenu(); });
+  const dots = Array.from(dotsWrap.children);
+  let ticking = false;
+  grid.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const cardW = grid.scrollWidth / cards.length;
+      const idx = Math.min(cards.length - 1, Math.max(0, Math.round(grid.scrollLeft / cardW)));
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      ticking = false;
+    });
+  }, { passive: true });
 }
 
 function setupSmoothScroll() {
