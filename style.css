@@ -79,8 +79,8 @@ body.cursor-hover .cursor-ring { width: 62px; height: 62px; background: rgba(255
 .nav-cta { border: 1px solid var(--line); border-radius: 999px; padding: 8px 18px !important; color: var(--white) !important; transition: background .25s, color .25s !important; }
 .nav-cta:hover { background: var(--white); color: var(--black) !important; }
 .nav-cta::after { display: none; }
-/* Navigasi mobile: bottom tab bar ala aplikasi (khusus layar kecil) */
-.mobile-tabbar { display: none; }
+/* Navigasi mobile: navigation rail ala aplikasi (khusus layar kecil) */
+.mobile-rail { display: none; }
 .swipe-hint { display: none; }
 .project-dots { display: none; }
 
@@ -254,30 +254,41 @@ footer { border-top: 1px solid var(--line-soft); padding: 1.6rem 0; }
   .certificates-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  body { padding-bottom: 74px; } /* ruang agar konten tidak tertutup tab bar */
+  body { padding-bottom: 0; padding-left: 68px; } /* ruang untuk navigation rail */
   .nav-links { display: none !important; }
+  .navbar { left: 68px; } /* navbar bergeser agar tidak tertutup rail */
 
-  /* Bottom tab bar: 5 tujuan, target sentuh 52px+, indikator aktif garis atas */
-  .mobile-tabbar {
+  /* Navigation rail: ramping 68px, item aktif berindikator pil ala M3 */
+  .mobile-rail {
     display: flex;
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
+    position: fixed; left: 0; top: 0; bottom: 0; width: 68px; z-index: 1000;
+    flex-direction: column; align-items: center;
     background: rgba(10,10,11,.94);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    border-top: 1px solid var(--line);
-    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    border-right: 1px solid var(--line);
+    padding-top: calc(76px + env(safe-area-inset-top));
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
   }
-  .mobile-tabbar a {
-    flex: 1; position: relative;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-    min-height: 52px; padding: 8px 0;
-    color: var(--dim); font-size: .62rem; font-weight: 500; letter-spacing: .02em;
+  .rail-progress { position: absolute; top: 0; right: -1px; width: 2px; height: 100%; }
+  .rail-progress span { display: block; width: 100%; height: 0; background: var(--white); }
+  .rail-brand {
+    font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+    letter-spacing: .06em; color: var(--white); margin-bottom: 1.5rem;
   }
-  .mobile-tabbar a i { font-size: 1.15rem; }
-  .mobile-tabbar a.active { color: var(--white); }
-  .mobile-tabbar a.active::before {
-    content: ''; position: absolute; top: 1px;
-    width: 22px; height: 2px; border-radius: 2px; background: var(--white);
+  .rail-brand span { color: var(--dim); }
+  .rail-items {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    width: 100%; margin: auto 0;
   }
+  .rail-items a {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    width: 60px; padding: 9px 0; border-radius: 14px;
+    color: var(--dim); font-size: .58rem; font-weight: 500; letter-spacing: .02em;
+    min-height: 52px; justify-content: center;
+  }
+  .rail-items a i { font-size: 1.05rem; padding: 4px 15px; border-radius: 99px; transition: background .25s, color .25s; }
+  .rail-items a.active { color: var(--white); }
+  .rail-items a.active i { background: var(--white); color: var(--black); }
 
   /* Hero mobile: teks terpusat, visual 3D diredupkan agar teks terbaca */
   .hero { padding-top: 5.5rem; text-align: center; }
