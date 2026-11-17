@@ -43,6 +43,37 @@ function setupRailToggle() {
   });
 }
 
+// Geser carousel pakai mouse (drag-to-scroll). Sentuh memakai scroll bawaan
+// browser; saat drag, snap dimatikan sementara agar tidak melawan.
+function setupDragScroll(grid) {
+  if (window.matchMedia('(hover: none)').matches) return;
+  let down = false, startX = 0, startScroll = 0, moved = false;
+  grid.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    down = true; moved = false;
+    startX = e.clientX; startScroll = grid.scrollLeft;
+    grid.style.scrollSnapType = 'none';
+    grid.classList.add('dragging');
+  });
+  window.addEventListener('pointermove', (e) => {
+    if (!down) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 6) moved = true;
+    if (moved) grid.scrollLeft = startScroll - dx;
+  });
+  const end = () => {
+    if (!down) return;
+    down = false;
+    grid.style.scrollSnapType = '';
+    grid.classList.remove('dragging');
+  };
+  window.addEventListener('pointerup', end);
+  window.addEventListener('pointercancel', end);
+  grid.addEventListener('click', (e) => {
+    if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+  }, true);
+}
+
 // Titik navigasi carousel (proyek dan sertifikat, khusus mobile via CSS).
 function setupProjectDots() {
   setupCarouselDots('projectsGrid', 'projectDots');
@@ -54,6 +85,7 @@ function setupCarouselDots(gridId, dotsId) {
   const grid = document.getElementById(gridId);
   const dotsWrap = document.getElementById(dotsId);
   if (!grid || !dotsWrap) return;
+  setupDragScroll(grid);
   const cards = Array.from(grid.children);
   if (!cards.length) return;
   cards.forEach((card, i) => {
