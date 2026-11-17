@@ -43,10 +43,15 @@ function setupRailToggle() {
   });
 }
 
-// Titik navigasi carousel proyek (khusus mobile, disembunyikan di desktop via CSS).
+// Titik navigasi carousel (proyek dan sertifikat, khusus mobile via CSS).
 function setupProjectDots() {
-  const grid = document.getElementById('projectsGrid');
-  const dotsWrap = document.getElementById('projectDots');
+  setupCarouselDots('projectsGrid', 'projectDots');
+  setupCarouselDots('certificatesGrid', 'certificateDots');
+}
+
+function setupCarouselDots(gridId, dotsId) {
+  const grid = document.getElementById(gridId);
+  const dotsWrap = document.getElementById(dotsId);
   if (!grid || !dotsWrap) return;
   const cards = Array.from(grid.children);
   if (!cards.length) return;
@@ -54,7 +59,7 @@ function setupProjectDots() {
     const dot = document.createElement('button');
     dot.type = 'button';
     dot.setAttribute('role', 'tab');
-    dot.setAttribute('aria-label', 'Lihat proyek ' + (i + 1));
+    dot.setAttribute('aria-label', 'Lihat item ' + (i + 1) + ' dari ' + cards.length);
     if (i === 0) dot.classList.add('active');
     dot.addEventListener('click', () => {
       grid.scrollTo({ left: card.offsetLeft - grid.offsetLeft, behavior: 'smooth' });
