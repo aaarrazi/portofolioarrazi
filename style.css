@@ -254,41 +254,35 @@ footer { border-top: 1px solid var(--line-soft); padding: 1.6rem 0; }
   .certificates-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  body { padding-bottom: 0; padding-left: 0; padding-right: 54px; } /* ruang untuk navigation rail kanan */
+  body { padding-bottom: 0; padding-left: 0; padding-right: 0; } /* rail melayang, tidak memakan ruang */
   .nav-links { display: none !important; }
-  .navbar { left: 0; right: 54px; } /* navbar bergeser agar tidak tertutup rail */
 
-  /* Navigation rail: ramping 54px di kanan, item aktif berindikator pil ala M3 */
+  /* Navigation rail melayang: transparan, menempel di kanan, blend difference
+     agar ikon putih terbaca di atas seksi gelap maupun terang */
   .mobile-rail {
     display: flex;
-    position: fixed; right: 0; top: 0; bottom: 0; width: 54px; z-index: 1000;
-    flex-direction: column; align-items: center;
-    background: rgba(10,10,11,.94);
-    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    border-left: 1px solid var(--line);
-    padding-top: calc(72px + env(safe-area-inset-top));
-    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    position: fixed; right: 6px; top: 50%; transform: translateY(-50%); z-index: 1000;
+    width: 46px; flex-direction: column; align-items: center;
+    background: transparent; border: none;
+    mix-blend-mode: difference; color: #fff;
+    padding: 0; pointer-events: none;
   }
-  .rail-progress { position: absolute; top: 0; left: -1px; width: 2px; height: 100%; }
-  .rail-progress span { display: block; width: 100%; height: 0; background: var(--white); }
   .rail-brand {
     font-family: var(--font-display); font-weight: 700; font-size: .85rem;
-    letter-spacing: .06em; color: var(--white); margin-bottom: 1.2rem;
+    letter-spacing: .06em; color: #fff; margin-bottom: .9rem; pointer-events: auto;
   }
-  .rail-brand span { color: var(--dim); }
   .rail-items {
     display: flex; flex-direction: column; align-items: center; gap: 2px;
-    width: 100%; margin: auto 0;
+    width: 100%;
   }
   .rail-items a {
     display: flex; flex-direction: column; align-items: center; gap: 3px;
     width: 46px; padding: 7px 0; border-radius: 12px;
-    color: var(--dim); font-size: .52rem; font-weight: 500; letter-spacing: .02em;
-    min-height: 48px; justify-content: center;
+    color: #fff; font-size: .52rem; font-weight: 500; letter-spacing: .02em;
+    min-height: 48px; justify-content: center; pointer-events: auto;
   }
-  .rail-items a i { font-size: .95rem; padding: 4px 11px; border-radius: 99px; transition: background .25s, color .25s; }
-  .rail-items a.active { color: var(--white); }
-  .rail-items a.active i { background: var(--white); color: var(--black); }
+  .rail-items a i { font-size: .95rem; padding: 4px 11px; border-radius: 99px; }
+  .rail-items a.active i { background: #fff; color: #000; }
 
   /* Hero mobile: teks terpusat, visual 3D diredupkan agar teks terbaca */
   .hero { padding-top: 5.5rem; text-align: center; }

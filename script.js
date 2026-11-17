@@ -80,13 +80,10 @@ function setupScrollAnimations() {
 
 function setupScrollProgress() {
   const bar = document.getElementById('scrollProgressBar');
-  const rail = document.getElementById('railProgressBar');
-  if (!bar && !rail) return;
+  if (!bar) return;
   const onScroll = () => {
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-    if (bar) bar.style.width = pct + '%';
-    if (rail) rail.style.height = pct + '%';
+    bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
