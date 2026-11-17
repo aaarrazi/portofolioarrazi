@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupNavbar();
   setupSmoothScroll();
   setupProjectDots();
+  setupRailToggle();
   setupScrollAnimations();
   setupScrollProgress();
   setupActiveNav();
@@ -20,6 +21,26 @@ function setupNavbar() {
   const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 40);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+}
+
+// Toggle tampil/sembunyi navigation rail (khusus mobile, preferensi disimpan).
+function setupRailToggle() {
+  const rail = document.querySelector('.mobile-rail');
+  const toggle = document.getElementById('railToggle');
+  if (!rail || !toggle) return;
+  const apply = (collapsed) => {
+    rail.classList.toggle('collapsed', collapsed);
+    toggle.setAttribute('aria-expanded', String(!collapsed));
+    toggle.setAttribute('aria-label', collapsed ? 'Tampilkan navigasi' : 'Sembunyikan navigasi');
+  };
+  let saved = false;
+  try { saved = localStorage.getItem('rail-collapsed') === '1'; } catch (err) { saved = false; }
+  apply(saved);
+  toggle.addEventListener('click', () => {
+    const collapsed = !rail.classList.contains('collapsed');
+    apply(collapsed);
+    try { localStorage.setItem('rail-collapsed', collapsed ? '1' : '0'); } catch (err) { /* abaikan */ }
+  });
 }
 
 // Titik navigasi carousel proyek (khusus mobile, disembunyikan di desktop via CSS).

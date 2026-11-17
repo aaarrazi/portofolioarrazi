@@ -271,6 +271,15 @@ footer { border-top: 1px solid var(--line-soft); padding: 1.6rem 0; }
     display: flex; flex-direction: column; align-items: center; gap: 2px;
     width: 100%;
   }
+  .rail-toggle {
+    background: none; border: none; color: #fff;
+    width: 46px; min-height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: auto; margin-bottom: .4rem;
+  }
+  .rail-toggle i { font-size: .8rem; transition: transform .3s; }
+  .mobile-rail.collapsed .rail-items { display: none; }
+  .mobile-rail.collapsed .rail-toggle i { transform: rotate(180deg); }
   .rail-items a {
     display: flex; flex-direction: column; align-items: center; gap: 3px;
     width: 46px; padding: 7px 0; border-radius: 12px;
