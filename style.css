@@ -350,7 +350,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 1.6rem 0; }
   /* Pengalaman mobile: carousel geser, garis timeline disembunyikan */
   .experience-timeline {
     border-left: none; padding-left: 0;
-    display: flex; overflow-x: auto; gap: .9rem;
+    display: flex; flex-direction: row; overflow-x: auto; gap: .9rem;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -358,7 +358,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 1.6rem 0; }
     padding: 0 clamp(1.25rem, 4vw, 2rem) .5rem;
   }
   .experience-timeline::-webkit-scrollbar { display: none; }
-  .experience-item { flex: 0 0 84%; width: auto; padding: 0; scroll-snap-align: center; }
+  .experience-item { flex: 0 0 84%; width: auto; padding: 0 !important; scroll-snap-align: center; }
   .experience-dot { display: none; }
 
   .skills-grid, .contact-grid { grid-template-columns: 1fr; }
